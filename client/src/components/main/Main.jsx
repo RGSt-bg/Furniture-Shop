@@ -1,6 +1,6 @@
 import Sidebar from "./sidebar/Sidebar.jsx";
 import SiteContent from "./site-content/SiteContent.jsx";
-// import FurnitureList from "./site-content/furniture-list/FurnitureList.jsx";
+import FurnitureList from "./site-content/furniture-list/FurnitureList.jsx";
 import Furnitures from "./site-content/furnitures/Furnitures.jsx";
 
 export default function Main() {
@@ -9,8 +9,8 @@ export default function Main() {
       <div id="site_content">
         <Sidebar />
         <SiteContent />
-        {/* <FurnitureList /> */}
-        <Furnitures />
+        <FurnitureList />
+        {/* <Furnitures /> */}
       </div>
     </div>
    );

@@ -1,22 +1,13 @@
-import FurnitureListItem from "./furniture-list-item/FurnitureListItem.jsx";
-import { BASE_URL } from "../../../../variables.jsx";
 import { useEffect, useState } from "react";
+import FurnitureListItem from "./furniture-list-item/FurnitureListItem.jsx";
+import { getFurnitures } from "../../../../utils/furnitureUtils.jsx";
 
 export default function FurnitureList() {
 
     const [furnitures, setFurnitures] = useState([]);
 
     useEffect(() => {
-        (async function getLatestFurnitures() {
-            try {
-                const response = await fetch(`${BASE_URL}/furniture/furnitureList`);
-                const data = await response.json();
-                const furnitures = Object.values(data);
-                setFurnitures(furnitures);
-            } catch (error) {
-                alert(error.message);
-            }
-        })();
+        getFurnitures('/furniture/furnitureList', setFurnitures);
     }, []);
 
     return(
