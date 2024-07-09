@@ -1,0 +1,89 @@
+html {
+    height: 100%;
+}
+
+body {
+  font: normal .80em 'trebuchet ms', arial, sans-serif;
+  background: #646557 url(../images/pattern.jpg) repeat fixed;
+  color: #5D5D5D;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: normal 175% 'century gothic', arial, sans-serif;
+  color: #43423F;
+  margin: 0 0 15px 0;
+  padding: 5px 0 5px 0;
+}
+
+h2 {
+  font: normal 175% 'century gothic', arial, sans-serif;
+  color: #B60000;
+  padding: 15px 0 5px 0;
+}
+
+h3 {
+  font: normal 165% 'century gothic', arial, sans-serif;
+}
+
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font: normal 120% arial, sans-serif;
+  color: #B60000;
+}
+
+h5,
+h6 {
+  font: italic 95% arial, sans-serif;
+  color: #888;
+}
+
+h6 {
+  color: #362C20;
+}
+
+p {
+    padding: 0 0 15px 0;
+    line-height: 1.5em;
+  }
+  
+  img {
+    border: 0;
+  }
+  
+  a,
+  a:hover {
+    outline: none;
+    text-decoration: underline;
+    color: #51A9FB;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: #5D5D5D;
+  }
+  
+  ul {
+    margin: 2px 0 22px 17px;
+  }
+  
+  ul li {
+    list-style-type: circle;
+    margin: 0 0 6px 0;
+    padding: 0 0 4px 5px;
+  }
+  
+  ol {
+    margin: 8px 0 22px 20px;
+  }
+  
+  ol li {
+    margin: 0 0 11px 0;
+  }  

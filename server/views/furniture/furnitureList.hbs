@@ -1,0 +1,36 @@
+<main>
+    <div id="content">
+        {{#if furniture}}
+        <h1>
+            <b><i>{{isNewTitle}}</i></b>
+        </h1>
+        <p>
+            {{isNew}}
+        </p>
+        <section id="newProducts">
+            <ul class="card-wrapper">
+                {{#each furniture}}
+                <li class="card">
+                    <img src="{{image}}" />
+                    <p><strong>Name: </strong><span class="name">{{name}}</span></p>
+                    <p>
+                        <strong>Category: </strong><span class="category">{{category}}</span>
+                    </p>
+                    <p>
+                        <strong>Price: $</strong><span class="formula">{{price}}</span>
+                    </p>
+                    <a class="details-btn" href="/furniture/details/{{_id}}">Details</a>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+        {{/if}}
+        <!-- Display an h2 if there are no furnitures -->
+        {{#unless furniture}}
+        <div id="no-furnitures">
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <h2>{{noFurnitures}}</h2>
+        </div>
+        {{/unless}}
+    </div>
+</main>
