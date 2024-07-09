@@ -13,7 +13,7 @@ export default function Header() {
       </div>
       <div id="menubar">
         <ul id="menu">
-          {/* <!-- put className="selected" in the "li" tag for the selected page - to highlight which page you're on --> */}
+          {/* <!-- put class/className="selected" in the "li" tag for the selected page - to highlight which page you're on --> */}
           <li className="selected">
             <a href="index.html">Home</a>
           </li>
