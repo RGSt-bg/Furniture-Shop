@@ -30,30 +30,12 @@ import { BASE_URL } from "./variables.jsx";
 //   return category.filter((furniture) => furniture.category != categoryName);
 // }
 
-// export default addLocations(categories) {
-//   const locationArr = ["left", "center", "right", "center"];
-//   let location = "";
-//   let j = 0;
-
-//   for (let i = 0; i < categories.length; i++) {
-
-//     if (i === locationArr.length) j = 0;
-//     location = locationArr[j];
-//     j++;
-//     categories[i].location = location;
-//   }
-
-//   return categories;
-// }
-
 export const getFurnitures = async function (path, setFurnitures) {
   try {
       const response = await fetch(`${BASE_URL}${path}`);
       const data = await response.json();
-console.log(data)
       const furnitures = Object.values(data);
-console.log(furnitures)
-debugger
+
       return setFurnitures(furnitures);
   } catch (error) {
       alert(error.message);
@@ -63,5 +45,4 @@ debugger
 // module.exports = {
   // calledFromWhere,
   // excludeCategory,
-  // addLocations,
 // }
