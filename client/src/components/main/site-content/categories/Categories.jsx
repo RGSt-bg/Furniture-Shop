@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getFurnitures } from "../../../../utils/furnitureUtils.jsx";
 import CategoryListItem from "./category-list-item/CategoryListItem.jsx";
 
-// This component list all furnitures BY CATEGORIES!
 export default function Furnitures() {
 
     const [categories, setCategories] = useState([]);
