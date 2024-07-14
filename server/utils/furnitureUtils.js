@@ -35,7 +35,7 @@ function addLocations(categories) {
 
   for (let i = 0; i < categories.length; i++) {
 
-    if (i === locationArr.length) j = 0;
+    if (i % 4 === 0) j = 0;
     location = locationArr[j];
     j++;
     categories[i].location = location;
