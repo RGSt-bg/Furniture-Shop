@@ -21,10 +21,11 @@ export default function FurnitureList() {
           <ul className="card-wrapper">
             {furnitures.length > 0 && furnitures.map((furniture) => (<FurnitureListItem key={furniture._id} furniture={furniture} />))}
           </ul>
-          {/* //Display a message if there are no furnitures */}
-          <div id="no-post">
-              {!furnitures.length && <h2>Sorry, there are no new Furnitures!</h2>}
-          </div>
+
+        <div id="no-post">
+            {!furnitures.length && <h2>Sorry, there are no new Furnitures!</h2>}
+        </div>
+        
         </section>
     </div>
    );
