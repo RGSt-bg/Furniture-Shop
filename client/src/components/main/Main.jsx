@@ -1,10 +1,14 @@
 import { Route, Routes } from "react-router-dom";
+
 import Sidebar from "./sidebar/Sidebar.jsx";
 import SiteContent from "./site-content/SiteContent.jsx";
-import FurnitureList from "./site-content/furniture-list/FurnitureList.jsx";
 import Categories from "./site-content/categories/Categories.jsx";
+import FurnitureList from "./site-content/furniture-list/FurnitureList.jsx";
+import CreateCategory from "./site-content/createCategory/CreateCategory.jsx";
 import About from "./site-content/about/About.jsx";
 import Contacts from "./site-content/contacts/Contacts.jsx";
+import Register from "./site-content/register/Register.jsx";
+import Login from "./site-content/login/Login.jsx";
 
 export default function Main() {
    return(
@@ -15,8 +19,11 @@ export default function Main() {
             <Route path="/" element={<SiteContent />} />
             <Route path="/furniture/categories" element={<Categories />} />
             <Route path="/furniture/furnitures" element={<FurnitureList />} />
+            <Route path="/furniture/createCategory" element={<CreateCategory />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/auth/register" element={<Register />} />
+            <Route path="/auth/login" element={<Login />} />
         </Routes>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { getFurnitures } from "../../../../utils/furnitureUtils.jsx";
 import CategoryListItem from "./category-list-item/CategoryListItem.jsx";
 

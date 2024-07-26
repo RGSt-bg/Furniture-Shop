@@ -312,8 +312,8 @@ ul#menu li.selected a:hover {
   font: 100% arial;
   border: 1px solid;
   border-radius: 8px;
-  width: 99px;
-  margin: 0 0 0 212px;
+  width: 120px;
+  margin: 0 0 0 191px;
   height: 33px;
   padding: 2px 0 3px 0;
   cursor: pointer;
@@ -339,8 +339,11 @@ ul#menu li.selected a:hover {
   background: none;
 }
 
-.form_settings p:nth-child(4) {
-  padding-top: 15px;
+.form_settings p.contacts,
+.form_settings p.login,
+.form_settings p.register,
+.form_settings p.createCategory {
+  margin-top: 15px;
 }
 
 .separator {
