@@ -25,7 +25,7 @@ export default function Contacts() {
               name="message"
             ></textarea>
           </p>
-          <p>
+          <p className="contacts">
             <span>&nbsp;</span>
             <input
               className="submit"
