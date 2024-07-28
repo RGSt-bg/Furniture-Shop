@@ -342,7 +342,8 @@ ul#menu li.selected a:hover {
 .form_settings p.contacts,
 .form_settings p.login,
 .form_settings p.register,
-.form_settings p.createCategory {
+.form_settings p.createCategory,
+.form_settings p.editCreate {
   margin-top: 15px;
 }
 

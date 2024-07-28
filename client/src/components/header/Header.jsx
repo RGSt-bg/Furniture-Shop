@@ -16,8 +16,8 @@ export default function Header() {
           <li className="selected"><Link to="/">Home</Link></li>
           <li><Link to="/furniture/categories">Furnitures</Link></li>
           <li><Link to="/furniture/furnitures">New Products</Link></li>
-          {/* <li><Link to="editCreate.html">Create Furniture</Link></li> */}
           <li><Link to="/furniture/createCategory">Create Category</Link></li>
+          <li><Link to="/furniture/editCreate">Create Furniture</Link></li>
           <li><Link to="/contacts">Contacts</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/auth/register">Register</Link></li>

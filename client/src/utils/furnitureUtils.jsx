@@ -42,6 +42,21 @@ export const getFurnitures = async function (path, setFurnitures) {
   }
 };
 
+export const getFurnitureDetails = async function (path, setFurnitureDetails) {
+
+console.log(path)
+
+  try {
+      const response = await fetch(`${BASE_URL}${path}`);
+      const data = await response.json();
+      const furnitures = Object.values(data);
+
+      return setFurnitureDetails(furnitureDetails);
+  } catch (error) {
+      alert(error.message);
+  }
+};
+
 // module.exports = {
   // calledFromWhere,
   // excludeCategory,
