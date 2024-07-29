@@ -103,7 +103,7 @@ router.get("/details/:furnitureId", async (req, res) => {
     const furniture = await furnitureService.getOneDetailed(furnitureId).lean();
     const isOwner = furniture.owner?._id == req.user?._id;
     furniture.isOwner = isOwner; // Only for details page on front-end
-
+    
     // res.render("furniture/details", { furniture, isOwner, isLoggedIn });
     res.send(furniture);
   }

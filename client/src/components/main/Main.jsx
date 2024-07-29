@@ -11,25 +11,29 @@ import About from "./site-content/about/About.jsx";
 import Contacts from "./site-content/contacts/Contacts.jsx";
 import Register from "./site-content/register/Register.jsx";
 import Login from "./site-content/login/Login.jsx";
+import {FurnitureIdContext} from "./site-content/furniture-list/furniture-details/FurnitureDetails.jsx";
 
 export default function Main() {
-   return(
+
+  return(
     <div id="main">
       <div id="site_content">
         <Sidebar />
-        <Routes>
+        <FurnitureIdContext.Provider value={null}>
+          <Routes>
             <Route path="/" element={<SiteContent />} />
             <Route path="/furniture/categories" element={<Categories />} />
             <Route path="/furniture/furnitures" element={<FurnitureList />} />
-            <Route path="/furniture/details/:id" element={<FurnitureDetails key={furniture._id} />} />
+            <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
             <Route path="/furniture/createCategory" element={<CreateCategory />} />
             <Route path="/furniture/editCreate" element={<EditCreate />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/login" element={<Login />} />
-        </Routes>
-      </div>
+          </Routes>
+        </FurnitureIdContext.Provider>
+    </div>
     </div>
    );
 };
