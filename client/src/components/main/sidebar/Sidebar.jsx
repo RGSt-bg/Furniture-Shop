@@ -16,7 +16,7 @@ export default function Sidebar() {
               <input
                 name="search"
                 type="image"
-                src="../images/search.png"
+                src="../../images/search.png"
                 alt="Search"
                 title="Search"
               />
