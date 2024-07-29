@@ -1,5 +1,6 @@
 @import url(reset.css);
 @import url(typography.css);
+@import url(loader.css);
 
 #content img {
   width: 180px;
@@ -211,7 +212,7 @@ ul#menu li.selected a:hover {
 .sidebar_item li a:hover {
   padding: 0 0 0 35px;
   display: block;
-  background: transparent url(../images/link.png) no-repeat left center;
+  background: transparent url(../../images/link.png) no-repeat left center;
 }
 
 .sidebar_item li a.selected {
