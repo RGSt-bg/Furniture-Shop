@@ -23,6 +23,7 @@ export default function CreateCategory() {
       const response = await createCategory("/furniture/createCategory", formValues);
       setMessage(response.message);
       alert(response.message);
+      setFormValues({ category: "", imageCategory: "" });
     } catch (err) {
       setMessage("An error occurred while creating the category.");
       alert(message);
