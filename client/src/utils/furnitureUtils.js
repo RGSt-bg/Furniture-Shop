@@ -65,9 +65,8 @@ export const createCategory = async function (path, categoryData) {
           body: JSON.stringify(categoryData),
       });
 
-      
       if (!response.ok) {
-        throw new Error("Network response is not ОК!");
+        throw new Error("Network response is not OK!");
       }
       const data = await response.json();
       return data;
