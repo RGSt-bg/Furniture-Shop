@@ -149,13 +149,13 @@ ul#menu li a {
   color: #FFF;
   text-decoration: none;
 }
-
+/* 
 ul#menu li.tab_selected a {
   height: 27px;
   padding: 6px 28px 5px 22px;
-}
+} */
 
-ul#menu li.selected a,
+ul#menu a.selected,
 ul#menu li a:hover,
 ul#menu li.selected a:hover {
   color: #ECEF01;

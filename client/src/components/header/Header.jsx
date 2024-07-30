@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -6,23 +6,23 @@ export default function Header() {
       <div id="logo">
         <div id="logo_text">
           <h1>
-          <Link to="/">Fu<span className="logo_colour">rni</span>ture <span className="logo_colour">Shop</span></Link>
+          <NavLink to="/">Fu<span className="logo_colour">rni</span>ture <span className="logo_colour">Shop</span></NavLink>
           </h1>
           <h2>Simple. Comfortable. At affordable prices.</h2>
         </div>
       </div>
       <div id="menubar">
         <ul id="menu">
-          <li className="selected"><Link to="/">Home</Link></li>
-          <li><Link to="/furniture/categories">Furnitures</Link></li>
-          <li><Link to="/furniture/furnitures">New Products</Link></li>
-          <li><Link to="/furniture/createCategory">Create Category</Link></li>
-          <li><Link to="/furniture/editCreate">Create Furniture</Link></li>
-          <li><Link to="/contacts">Contacts</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/auth/register">Register</Link></li>
-          <li><Link to="/auth/login">Login</Link></li>
-          <li><Link to="/auth/login">Logout</Link></li>
+          <li><NavLink to="/" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Home</NavLink></li>
+          <li><NavLink to="/furniture/categories" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Furnitures</NavLink></li>
+          <li><NavLink to="/furniture/furnitures" className={({ isActive }) => `${isActive ? "selected" : ''}`}>New Products</NavLink></li>
+          <li><NavLink to="/furniture/createCategory" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Category</NavLink></li>
+          <li><NavLink to="/furniture/editCreate" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Furniture</NavLink></li>
+          <li><NavLink to="/contacts" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Contacts</NavLink></li>
+          <li><NavLink to="/about" className={({ isActive }) => `${isActive ? "selected" : ''}`}>About</NavLink></li>
+          <li><NavLink to="/auth/register" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Register</NavLink></li>
+          <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Login</NavLink></li>
+          <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Logout</NavLink></li>
         </ul>
       </div>
     </div>
