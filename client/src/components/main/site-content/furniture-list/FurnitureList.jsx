@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import FurnitureListItem from "./furniture-list-item/FurnitureListItem.jsx";
-import { getFurnitures } from "../../../../utils/furnitureUtils.jsx";
+import { getFurnitures } from "../../../../utils/furnitureUtils.js";
 
 export default function FurnitureList() {
 

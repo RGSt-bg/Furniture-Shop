@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
+import {FurnitureIdContext} from "./site-content/furniture-list/furniture-details/FurnitureDetails.jsx";
+
 import Sidebar from "./sidebar/Sidebar.jsx";
 import SiteContent from "./site-content/SiteContent.jsx";
 import Categories from "./site-content/categories/Categories.jsx";
@@ -11,7 +13,6 @@ import About from "./site-content/about/About.jsx";
 import Contacts from "./site-content/contacts/Contacts.jsx";
 import Register from "./site-content/register/Register.jsx";
 import Login from "./site-content/login/Login.jsx";
-import {FurnitureIdContext} from "./site-content/furniture-list/furniture-details/FurnitureDetails.jsx";
 
 export default function Main() {
 

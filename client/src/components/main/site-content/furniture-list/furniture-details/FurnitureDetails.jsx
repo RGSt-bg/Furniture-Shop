@@ -1,7 +1,7 @@
 import { useEffect, useState, createContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { getFurnitureDetails } from "../../../../../utils/furnitureUtils.jsx";
+import { getFurnitureDetails } from "../../../../../utils/furnitureUtils.js";
 
 let furnitureId = null;
 
