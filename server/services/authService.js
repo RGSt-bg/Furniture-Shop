@@ -6,7 +6,7 @@ const { SECRET } = require('../config');
 
 exports.register = async (userData) => {
     if (userData.password !== userData.rePassword)
-        throw new Error('Password missmatch!');
+        throw new Error('Passwords do not match!');
     
     const user = await User.findOne({ email: userData.email});
     if (user) {
@@ -29,7 +29,8 @@ exports.login = async ({ email, password }) => {
     }
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-        throw new Error('Login failed!');
+        // throw new Error('Login failed!');
+        res.send({ message: 'Login failed!' });
     }
 
     const token = await generateToken(user);

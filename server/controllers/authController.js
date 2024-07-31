@@ -29,10 +29,10 @@ router.post('/register', async (req, res) => {
     const userData = req.body;
 
     try {
-    const token = await authService.register(userData);
+      const token = await authService.register(userData);
 
-    res.cookie('auth', token);
-    const response = {
+      res.cookie('auth', token);
+      const response = {
         success: true,
         message: 'Registration successfully!',
         token: token,
