@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../../../utils/authUtils.js";
 
@@ -11,6 +11,8 @@ export default function Login() {
   });
 
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
   
   const formValuesHandler = (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ export default function Login() {
       setMessage(response.message);
       alert(response.message);
       setFormValues({ email: "", password: "" });
+      navigate("/");
     } catch (err) {
       setMessage("An error occurred while logging!");
       alert(message);
