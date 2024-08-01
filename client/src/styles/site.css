@@ -6,6 +6,10 @@
   width: 180px;
 }
 
+.categories img {
+  border-radius: 50%;
+}
+
 .left {
   display: flex;
   flex-direction: row;
@@ -18,7 +22,7 @@
 }
 
 .left h2 {
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 .center {
@@ -33,8 +37,8 @@
 }
 
 .center h2 {
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 20px;
+  margin-right: 60px;
 }
 
 .right {
@@ -49,7 +53,7 @@
 }
 
 .right h2 {
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 #content .left img {
