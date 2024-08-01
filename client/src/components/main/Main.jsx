@@ -13,6 +13,7 @@ import About from "./site-content/about/About.jsx";
 import Contacts from "./site-content/contacts/Contacts.jsx";
 import Register from "./site-content/register/Register.jsx";
 import Login from "./site-content/login/Login.jsx";
+import Logout from "./site-content/logout/Logout.jsx";
 
 export default function Main() {
 
@@ -32,6 +33,7 @@ export default function Main() {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/logout" element={<Logout />} />
           </Routes>
         </FurnitureIdContext.Provider>
     </div>

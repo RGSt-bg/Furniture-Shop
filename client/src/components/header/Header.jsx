@@ -22,7 +22,7 @@ export default function Header() {
           <li><NavLink to="/about" className={({ isActive }) => `${isActive ? "selected" : ''}`}>About</NavLink></li>
           <li><NavLink to="/auth/register" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Register</NavLink></li>
           <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Login</NavLink></li>
-          <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Logout</NavLink></li>
+          <li><NavLink to="/auth/logout" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Logout</NavLink></li>
         </ul>
       </div>
     </div>
