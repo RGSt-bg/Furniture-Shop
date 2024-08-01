@@ -10,7 +10,7 @@ export default function Login() {
     password: "",
   });
 
-  const [message, setMessage] = useState("");
+  let [message, setMessage] = useState("");
 
   const navigate = useNavigate();
   
@@ -29,7 +29,8 @@ export default function Login() {
       setFormValues({ email: "", password: "" });
       navigate("/");
     } catch (err) {
-      setMessage("An error occurred while logging!");
+      message = "An error occurred while logging!";
+      setMessage(message);
       alert(message);
     };
   };
