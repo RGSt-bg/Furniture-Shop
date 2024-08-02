@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
+import { AuthContext } from "../../App.jsx";
+
 export default function Header() {
+
+  const {isAuth} = useContext(AuthContext);
   return (
     <div id="header">
       <div id="logo">
@@ -16,13 +21,25 @@ export default function Header() {
           <li><NavLink to="/" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Home</NavLink></li>
           <li><NavLink to="/furniture/categories" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Furnitures</NavLink></li>
           <li><NavLink to="/furniture/furnitures" className={({ isActive }) => `${isActive ? "selected" : ''}`}>New Products</NavLink></li>
-          <li><NavLink to="/furniture/createCategory" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Category</NavLink></li>
-          <li><NavLink to="/furniture/editCreate" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Furniture</NavLink></li>
+          {isAuth ? (
+            <>
+              <li><NavLink to="/furniture/createCategory" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Category</NavLink></li>
+              <li><NavLink to="/furniture/editCreate" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Furniture</NavLink></li>
+            </>
+          ) : null}
           <li><NavLink to="/contacts" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Contacts</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => `${isActive ? "selected" : ''}`}>About</NavLink></li>
-          <li><NavLink to="/auth/register" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Register</NavLink></li>
-          <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Login</NavLink></li>
-          <li><NavLink to="/auth/logout" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Logout</NavLink></li>
+          {!isAuth ? (
+            <>
+              <li><NavLink to="/auth/register" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Register</NavLink></li>
+              <li><NavLink to="/auth/login" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Login</NavLink></li>
+            </>
+          ) : null}
+          {isAuth ? (
+            <>
+              <li><NavLink to="/auth/logout" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Logout</NavLink></li>
+            </>
+          ) : null}
         </ul>
       </div>
     </div>
