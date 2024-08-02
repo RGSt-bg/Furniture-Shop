@@ -30,13 +30,13 @@ import { BASE_URL } from "./variables.js";
 //   return category.filter((furniture) => furniture.category != categoryName);
 // }
 
-export const getFurnitures = async function (path, setFurnitures) {
+export const getFurnitures = async function (path, getFurnitures) {
   try {
       const response = await fetch(`${BASE_URL}${path}`);
       const data = await response.json();
       const furnitures = Object.values(data);
 
-      return setFurnitures(furnitures);
+      return getFurnitures(furnitures);
   } catch (error) {
       alert(error.message);
   }
