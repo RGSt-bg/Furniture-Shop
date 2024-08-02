@@ -29,8 +29,8 @@ exports.login = async ({ email, password }) => {
     }
     const isValid = await bcrypt.compare(password, user.password);
     if (!isValid) {
-        // throw new Error('Login failed!');
-        res.send({ message: 'Login failed!' });
+        throw new Error('Wrong password or email address!');
+        // res.send({ message: 'Login failed!' });
     }
 
     const token = await generateToken(user);
