@@ -1,4 +1,15 @@
+import { useEffect, useState } from "react";
+
+import { getFurnitures } from "../../../../utils/furnitureUtils.js";
+
 export default function EditCreate() {
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+      getFurnitures('/furniture/categories', setCategories);
+  }, []);
+
    return(
     <div id="content">
     <h1><b><i>Create/Edit Furniture</i></b></h1>
@@ -8,15 +19,10 @@ export default function EditCreate() {
           <span>Name*</span><input className="contact" type="text" name="name" required defaultValue="" />
         </p>
         <p>
-          {/* <span>Category*</span><input className="contact" type="" name="category" defaultValue="" /> */}
           <span>Category*</span>
           <select className="contact" required name="category">
-            <option defaultValue="{{category}}">..........</option>
-            <option defaultValue="Bed">Bed</option>
-            <option defaultValue="Chair">Chair</option>
-            <option defaultValue="Sofa">Sofa</option>
-            <option defaultValue="Table">Table</option>
-            <option defaultValue="Wardrobe">Wardrobe</option>
+          {categories.length > 0 && categories.map((category) => (
+            <option defaultValue={category.category}>{category.category}</option>))}
           </select>
         </p>
         <p>
