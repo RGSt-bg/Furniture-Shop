@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { AuthContext } from "../../../../App.jsx";
 
 import { logout } from "../../../../utils/authUtils.js";
 
 export default function Logout() {
   const [message, setMessage] = useState("");
+  const {setIsAuth} = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +20,7 @@ export default function Logout() {
         try {
           const response = await logout("/auth/logout");
           setMessage(response.message);
+          setIsAuth(false);
           navigate("/");
           alert(response.message);
         } catch (err) {
