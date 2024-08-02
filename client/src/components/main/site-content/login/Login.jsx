@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import { AuthContext } from "../../../../App.jsx";
 import { login } from "../../../../utils/authUtils.js";
 
 export default function Login() {
@@ -9,9 +10,9 @@ export default function Login() {
     email: "",
     password: "",
   });
-
   let [message, setMessage] = useState("");
-
+  const {setIsAuth} = useContext(AuthContext);
+  
   const navigate = useNavigate();
   
   const formValuesHandler = (e) => {
@@ -26,8 +27,11 @@ export default function Login() {
       const response = await login("/auth/login", formValues);
       setMessage(response.message);
       alert(response.message);
-      setFormValues({ email: "", password: "" });
-      navigate("/");
+      if (response.message != 'Wrong password or email address!') {
+        setFormValues({ email: "", password: "" });
+        setIsAuth(true);
+        navigate("/");
+      }
     } catch (err) {
       message = "An error occurred while logging!";
       setMessage(message);
