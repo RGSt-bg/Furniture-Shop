@@ -1,6 +1,7 @@
 .loader {
     border: 6px solid #d7d6d6; /* Light grey */
     border-top: 6px solid #646557; /* Dark grey */
+    border-bottom: 6px solid #646557; /* Dark grey */
     border-radius: 50%;
     width: 40px;
     height: 40px;
