@@ -1,7 +1,9 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../../App.jsx";
+import { UserIdContext } from "../../Main.jsx";
+
 import { login } from "../../../../utils/authUtils.js";
 
 export default function Login() {
@@ -12,6 +14,7 @@ export default function Login() {
   });
   let [message, setMessage] = useState("");
   const {setIsAuth} = useContext(AuthContext);
+  let {userId, setUserId} = useContext(UserIdContext);
   
   const navigate = useNavigate();
   
@@ -25,20 +28,22 @@ export default function Login() {
 
     try {
       const response = await login("/auth/login", formValues);
-      setMessage(response.message);
-      alert(response.message);
-      if (response.message != 'Wrong password or email address!') {
+      if (response.success) {
+        setMessage(response.message);
+        alert(response.message);
         setFormValues({ email: "", password: "" });
         setIsAuth(true);
+        userId = response._id;
+        setUserId(userId);
         navigate("/");
-      }
+}
     } catch (err) {
       message = "An error occurred while logging!";
       setMessage(message);
       alert(message);
     };
   };
-  
+
    return(
     <div id="content">
     <h1><b><i>Login Form</i></b></h1>

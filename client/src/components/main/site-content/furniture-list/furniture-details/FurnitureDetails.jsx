@@ -1,7 +1,8 @@
-import { useEffect, useState, createContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, createContext, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 
 import { getFurnitureDetails } from "../../../../../utils/furnitureUtils.js";
+import { UserIdContext } from "../../../Main.jsx";
 
 let furnitureId = null;
 
@@ -9,10 +10,13 @@ export default function FurnitureDetails() {
 
     const [furnitureDetails, setFurnitureDetails] = useState({});
     const {id: furnitureId} = useParams();
+    const {userId} = useContext(UserIdContext);
 
     useEffect(() => {
         getFurnitureDetails(`/furniture/details/${furnitureId}`, setFurnitureDetails);
-    }, []);
+    }, [furnitureId]);
+
+    const isOwner = userId === furnitureDetails?.owner?._id;
 
   return (
     <div>
@@ -22,7 +26,7 @@ export default function FurnitureDetails() {
             <div id="details-wrapper">
               <p id="details-title">Name: { furnitureDetails.name }</p>
               <div id="img-wrapper">
-                <img src={ furnitureDetails.imageFurniture } />
+                <img src={ furnitureDetails.imageFurniture } alt={furnitureDetails.name} />
               </div>
               <div id="info-wrapper">
                 <table>
@@ -42,7 +46,7 @@ export default function FurnitureDetails() {
                     <tr>
                       <td>
                         <p>
-                          Dimensions (L/H/D): <span id="details-dimensions">{ furnitureDetails.dimensions }</span>
+                          Material: <span id="details-material">{ furnitureDetails.material }</span>
                         </p>
                       </td>
                       <td>
@@ -57,22 +61,12 @@ export default function FurnitureDetails() {
                   Description: <span id="details-description">{ furnitureDetails.description }</span>
                 </p>
               </div>
-              {/* Edit and Delete are only for creator
-                  <div id="action-buttons">
-                       {#if user}
-                      {#if owner}
-                      <a href="/edit/{creator._id}" class="details-btn">Edit</a> 
-                      <a href="editCreate.html" class="details-btn">Edit</a>
-                      <a href="/delete/{creator._id}" class="details-btn">Delete</a>
-                       {else}
-                      {#if amISignedUp}
-                      <p id="already-liked">You already liked this stone!</p>
-                      {else} 
-                      <a href="/like/{creator._id}" class="details-btn">Buy</a>
-                       {/if}
-                      {/if}
-                      {/if} 
-                  </div> */}
+              {isOwner ? (
+                <div id="action-buttons">
+                    <Link to={`/furniture/editCreate/${furnitureId}`} className="details-btn">Edit</Link>
+                    <Link to={`/furniture/delete/${furnitureId}`} className="details-btn">Delete</Link>
+                </div>
+              ) : null}
             </div>
           </section>
         </div>

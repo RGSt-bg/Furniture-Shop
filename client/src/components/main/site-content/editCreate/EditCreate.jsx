@@ -22,7 +22,7 @@ export default function EditCreate() {
           <span>Category*</span>
           <select className="contact" required name="category">
           {categories.length > 0 && categories.map((category) => (
-            <option defaultValue={category.category}>{category.category}</option>))}
+            <option key={category._id} value={category.category}>{category.category}</option>))}
           </select>
         </p>
         <p>

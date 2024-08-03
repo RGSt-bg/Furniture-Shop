@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../../App.jsx";
+import { UserIdContext } from "../../Main.jsx";
+
 import { register } from "../../../../utils/authUtils";
 
 export default function Register() {
@@ -15,6 +17,7 @@ export default function Register() {
 
   let [message, setMessage] = useState("");
   const {setIsAuth} = useContext(AuthContext);
+  const {setUserId} = useContext(UserIdContext);
 
   const navigate = useNavigate();
   
@@ -35,11 +38,12 @@ export default function Register() {
 
     try {
       const response = await register("/auth/register", formValues);
-      setMessage(response.message);
-      alert(response.message);
       if (response.success) {
+        setMessage(response.message);
+        alert(response.message);
         setFormValues({ username: "", email: "", password: "", rePassword: "" });
         setIsAuth(true);
+        setUserId(response.userId);
         navigate("/");
       }
     } catch (err) {

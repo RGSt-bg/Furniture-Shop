@@ -46,8 +46,7 @@ export const getFurnitureDetails = async function (path, setFurnitureDetails) {
 
   try {
       const response = await fetch(`${BASE_URL}${path}`);
-      const data = await response.json();
-      const furnitureDetails = Object.values(data);
+      const furnitureDetails = await response.json();
 
       return setFurnitureDetails(furnitureDetails);
   } catch (error) {
