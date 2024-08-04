@@ -4,6 +4,7 @@
 
 #content img {
   width: 180px;
+  margin-top: 10px;
 }
 
 .categories img {
@@ -427,7 +428,7 @@ ul#menu li.selected a:hover {
 }
 
 .card p {
-  min-width: 90% !important;
+  min-width: 92% !important;
   margin: 0;
   font-size: 14px;
   max-height: 20px;

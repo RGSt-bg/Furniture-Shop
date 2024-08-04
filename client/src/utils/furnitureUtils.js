@@ -75,6 +75,48 @@ export const createCategory = async function (path, categoryData) {
   }
 };
 
+export const createFurnitures = async function (path, furnitureData) {
+  try {
+      const response = await fetch(`${BASE_URL}${path}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(furnitureData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response is not OK!");
+      }
+      const data = await response.json();
+      return data;
+      
+  } catch (error) {
+      alert(error.message);
+  }
+};
+
+export const editFurnitures = async function (path, furnitureData) {
+  try {
+      const response = await fetch(`${BASE_URL}${path}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(furnitureData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response is not OK!");
+      }
+      const data = await response.json();
+      return data;
+      
+  } catch (error) {
+      alert(error.message);
+  }
+};
+
 // module.exports = {
   // calledFromWhere,
   // excludeCategory,

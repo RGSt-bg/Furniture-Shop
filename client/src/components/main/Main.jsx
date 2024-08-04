@@ -34,7 +34,8 @@ export default function Main() {
             <Route path="/furniture/furnitures" element={<FurnitureList />} />
             <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
             <Route path="/furniture/createCategory" element={<CreateCategory />} />
-            <Route path="/furniture/editCreate/*" element={<EditCreate />} />
+            <Route path="/furniture/editCreate" element={<EditCreate />} />
+            <Route path="/furniture/editCreate/:id" element={<EditCreate />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/auth/register" element={<Register />} />
