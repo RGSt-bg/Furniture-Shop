@@ -11,7 +11,7 @@ export default function Sidebar() {
                 className="search"
                 type="text"
                 name="search_field"
-                placeholder="Enter keywords....."
+                placeholder="Enter part of keyword..."
               />
               <input
                 name="search"
