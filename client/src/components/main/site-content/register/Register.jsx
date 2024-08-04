@@ -17,7 +17,7 @@ export default function Register() {
 
   let [message, setMessage] = useState("");
   const {setIsAuth} = useContext(AuthContext);
-  const {setUserId} = useContext(UserIdContext);
+  let {userId, setUserId} = useContext(UserIdContext);
 
   const navigate = useNavigate();
   
@@ -43,7 +43,8 @@ export default function Register() {
         alert(response.message);
         setFormValues({ username: "", email: "", password: "", rePassword: "" });
         setIsAuth(true);
-        setUserId(response.userId);
+        userId = response._id;
+        setUserId(userId);
         navigate("/");
       }
     } catch (err) {

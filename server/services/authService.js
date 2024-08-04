@@ -5,19 +5,19 @@ const User = require('../models/User');
 const { SECRET } = require('../config');
 
 exports.register = async (userData) => {
+    
     if (userData.password !== userData.rePassword)
         throw new Error('Passwords do not match!');
     
     const user = await User.findOne({ email: userData.email});
-    if (user) {
+
+    if (user != null) {
         throw new Error('User already exists!');
     }
     /* This is the way if we want to have an autologin!!!*/
     const createdUser = await User.create(userData);
-
     const token = await generateToken(createdUser);
-
-    return token; //In this case we must to delete bellow row!!!
+    return {token: token, userId: createdUser._id}; //In this case we must to delete bellow row!!!
 
     // return User.create(userData);
 };

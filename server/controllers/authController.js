@@ -29,19 +29,18 @@ router.post('/register', async (req, res) => {
     const userData = req.body;
 
     try {
-      const token = await authService.register(userData);
-
-      res.cookie('auth', token);
-      const response = {
+        const { token, userId } = await authService.register(userData);
+        res.cookie('auth', token);
+        const response = {
         success: true,
         message: 'Registration successfully!',
         token: token,
+        _id: userId,
       };
-    
       res.send(JSON.stringify(response));
     }
-    catch (err){
-        res.send(JSON.stringify({message: getErrorMessage(err)}));
+    catch (err) {
+      res.status(400).send(JSON.stringify({message: getErrorMessage(err)}));
     }
 });
 

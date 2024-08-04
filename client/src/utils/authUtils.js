@@ -8,10 +8,19 @@ export const register = async function (path, registerData) {
             body: JSON.stringify(registerData),
             });
         const data = await response.json();
-        localStorage.setItem("auth", data.token);
+
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+
+        if (data.token != undefined)
+            localStorage.setItem("auth", data.token);
+
         return data;
+
     } catch (error) {
         alert(error.message);
+        return { success: false, message: error.message };
     }
 }
 
