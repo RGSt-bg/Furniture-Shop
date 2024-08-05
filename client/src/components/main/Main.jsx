@@ -18,11 +18,13 @@ import Logout from "./site-content/logout/Logout.jsx";
 
 export const UserIdContext = createContext('');
 export const CalledFromContext = createContext('');
+export const CategoryContext = createContext('');
 
 export default function Main() {
 
   const [userId, setUserId] = useState('');
   const [calledFrom, setCalledFrom] = useState('');
+  const [category, setCategory] = useState('');
 
   return(
     <div id="main">
@@ -31,10 +33,13 @@ export default function Main() {
         <FurnitureIdContext.Provider value={null}>
         <UserIdContext.Provider value={{userId, setUserId}}>
         <CalledFromContext.Provider value={{calledFrom, setCalledFrom}}>
+        <CategoryContext.Provider value={{category, setCategory}}>
           <Routes>
             <Route path="/" element={<SiteContent />} />
             <Route path="/furniture/categories" element={<Categories />} />
             <Route path="/furniture/furnitures" element={<FurnitureList />} />
+            <Route path="/furniture/furnitures/:category" element={<FurnitureList />} />
+            <Route path="/furniture/furnitures/:calledFrom" element={<FurnitureList />} />
             <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
             <Route path="/furniture/createCategory" element={<CreateCategory />} />
             <Route path="/furniture/editCreate" element={<EditCreate />} />
@@ -45,6 +50,7 @@ export default function Main() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/logout" element={<Logout />} />
           </Routes>
+        </CategoryContext.Provider>
         </CalledFromContext.Provider>
         </UserIdContext.Provider>
         </FurnitureIdContext.Provider>
