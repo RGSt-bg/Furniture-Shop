@@ -20,7 +20,7 @@ export default function Header() {
         <ul id="menu">
           <li><NavLink to="/" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Home</NavLink></li>
           <li><NavLink to="/furniture/categories" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Furnitures</NavLink></li>
-          <li><NavLink to="/furniture/furnitures" className={({ isActive }) => `${isActive ? "selected" : ''}`}>New Products</NavLink></li>
+          <li><NavLink to="/furniture/furnitures?calledFrom=newProducts" className={({ isActive }) => `${isActive ? "selected" : ''}`}>New Products</NavLink></li>
           {isAuth ? (
             <>
               <li><NavLink to="/furniture/createCategory" className={({ isActive }) => `${isActive ? "selected" : ''}`}>Create Category</NavLink></li>
