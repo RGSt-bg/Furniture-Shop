@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { createCategory } from "../../../../utils/furnitureUtils.js";
+import { createCategory } from "../../../../utils/furnitureApi.js";
 
 export default function CreateCategory() {
 

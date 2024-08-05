@@ -5,7 +5,7 @@ import { UserIdContext } from "../../Main.jsx";
 
 import { useForm } from "../../../../hooks/useForm.js";
 
-import { getFurnitures, getFurnitureDetails, createFurnitures, editFurnitures } from "../../../../utils/furnitureUtils.js";
+import { getFurnitures, getFurnitureDetails, createFurnitures, editFurnitures } from "../../../../utils/furnitureApi.js";
 
 export default function EditCreate() {
 

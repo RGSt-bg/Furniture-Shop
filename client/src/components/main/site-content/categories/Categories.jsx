@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getFurnitures } from "../../../../utils/furnitureUtils.js";
+import { getFurnitures } from "../../../../utils/furnitureApi.js";
 import CategoryListItem from "./category-list-item/CategoryListItem.jsx";
 
 export default function Furnitures() {
