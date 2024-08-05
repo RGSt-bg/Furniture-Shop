@@ -17,10 +17,12 @@ import Login from "./site-content/login/Login.jsx";
 import Logout from "./site-content/logout/Logout.jsx";
 
 export const UserIdContext = createContext('');
+export const CalledFromContext = createContext('');
 
 export default function Main() {
 
   const [userId, setUserId] = useState('');
+  const [calledFrom, setCalledFrom] = useState('');
 
   return(
     <div id="main">
@@ -28,6 +30,7 @@ export default function Main() {
         <Sidebar />
         <FurnitureIdContext.Provider value={null}>
         <UserIdContext.Provider value={{userId, setUserId}}>
+        <CalledFromContext.Provider value={{calledFrom, setCalledFrom}}>
           <Routes>
             <Route path="/" element={<SiteContent />} />
             <Route path="/furniture/categories" element={<Categories />} />
@@ -42,6 +45,7 @@ export default function Main() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/logout" element={<Logout />} />
           </Routes>
+        </CalledFromContext.Provider>
         </UserIdContext.Provider>
         </FurnitureIdContext.Provider>
     </div>

@@ -41,7 +41,7 @@ export default function CreateCategory() {
         </p>
         <p>
           <span>Image*</span>
-          <input className="contact" type="text" name="imageCategory" required placeholder="Valid image url ..." value={formValues.imageCategory} onChange={formValuesHandler}/>
+          <input className="contact" type="text" name="imageCategory" required value={formValues.imageCategory} onChange={formValuesHandler}/>
         </p>
         <p className="createCategory">
           <span>&nbsp;</span>

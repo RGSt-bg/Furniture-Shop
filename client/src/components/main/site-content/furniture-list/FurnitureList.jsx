@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
+import { CalledFromContext } from "../../Main.jsx";
 
 import FurnitureListItem from "./furniture-list-item/FurnitureListItem.jsx";
 import { getFurnitures } from "../../../../utils/furnitureUtils.js";
@@ -6,6 +8,9 @@ import { getFurnitures } from "../../../../utils/furnitureUtils.js";
 export default function FurnitureList() {
 
     const [furnitures, setFurnitures] = useState([]);
+
+    const {calledFrom} = useContext(CalledFromContext);
+console.log(calledFrom);
 
     useEffect(() => {
         getFurnitures('/furniture/furnitureList', setFurnitures);
