@@ -50,17 +50,7 @@ export default function Sidebar() {
               </a>
             </li>
             <li>
-              <a target="_blank" href="https://rh.com">
-                Restoration Hardware
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="https://www.williams-sonoma.com/">
-                Williams Sonoma
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="https://www.la-z-boy.com/v">
+              <a target="_blank" href="https://www.la-z-boy.com/">
                 La-Z-Boy Furniture Galleries
               </a>
             </li>
