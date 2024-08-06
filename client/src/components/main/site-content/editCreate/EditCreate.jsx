@@ -67,6 +67,7 @@ export default function EditCreate() {
         material: furnitureDetails.material || '',
         price: furnitureDetails.price || '',
         description: furnitureDetails.description || '',
+        owner: furnitureDetails.owner || '',
       });
     }
   }, [furnitureDetails]);

@@ -25,26 +25,24 @@ export default function FurnitureDetails() {
 
     async function furnitureDeleteHandler() {
 
-      try {
-        const response = await deleteFurniture("/furniture/delete", furnitureId);
-        setMessage(response.message);
-        alert(response.message);
-console.log('Called From:', calledFrom);
-        // furnitureId = '';
-        if (calledFrom === "category") {
-console.log('Navigating to category');
-          navigate(`/furniture/furnitures/${furnitureDetails.category}`);
-        } else if (calledFrom === "newProducts") {
-console.log('Navigating to new products');
-          navigate(`/furniture/furnitures`);
-} else {
-  console.log('Called From has unexpected value:', calledFrom); // Debugging
-        }
-      } catch (err) {
-        setMessage("An error occurred while deleting the furniture.");
-        alert(message);
-      };
-
+      const confirmDelete = confirm("Are you sure you want to delete this furniture?");
+      if (!confirmDelete) {
+        return;
+      }
+        try {
+          const response = await deleteFurniture("/furniture/delete", furnitureId);
+          setMessage(response.message);
+          // furnitureId = '';
+          if (calledFrom === "category") {
+            navigate(`/furniture/furnitures/${furnitureDetails.category}`);
+          } else if (calledFrom === "newProducts") {
+            navigate(`/furniture/furnitures`);
+          }
+          alert(response.message);
+        } catch (err) {
+          setMessage("An error occurred while deleting the furniture.");
+          alert(message);
+        };
     }
 
   return (
