@@ -86,3 +86,25 @@ export const editFurnitures = async function (path, furnitureData) {
       alert(error.message);
   }
 };
+
+
+export const deleteFurniture = async function (path, furnitureId) {
+
+  try {
+    const response = await fetch(`${BASE_URL}${path}/${furnitureId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (!response.ok) {
+      throw new Error("Network response is not OK!");
+    }
+
+    const data = await response.json();
+    return data;
+    
+  } catch (error) {
+      alert(error.message);
+  }
+};

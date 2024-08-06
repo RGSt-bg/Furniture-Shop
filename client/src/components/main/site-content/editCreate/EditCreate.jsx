@@ -23,6 +23,7 @@ export default function EditCreate() {
     material: '',
     price: '',
     description: '',
+    owner: userId,
   }
 
   const submitHandler = async (values) => {
@@ -106,7 +107,7 @@ export default function EditCreate() {
         </p>
         <p>
           <span>Price*</span>
-          <input className="contact" type="number" name="price" required min={0.00} value={values.price} onChange={changeHandler} />
+          <input className="contact" type="number" name="price" required min={1.00} value={values.price} onChange={changeHandler} />
         </p>
         <p>
           <span>Description*</span>

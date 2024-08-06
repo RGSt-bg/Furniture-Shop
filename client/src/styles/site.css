@@ -423,6 +423,11 @@ ul#menu li.selected a:hover {
   border-radius: 8px;
 }
 
+button.details-btn {
+  width: auto;
+  cursor: pointer;
+}
+
 .details-btn:hover {
   background-color: grey;
   color: white;

@@ -1,15 +1,17 @@
 import { useEffect, useState, createContext, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
-import { getFurnitureDetails } from "../../../../../utils/furnitureApi.js";
-import { UserIdContext } from "../../../Main.jsx";
+import { UserIdContext, CalledFromContext } from "../../../Main.jsx";
+
+import { getFurnitureDetails, deleteFurniture } from "../../../../../utils/furnitureApi.js";
 
 let furnitureId = null;
 
 export default function FurnitureDetails() {
 
     const [furnitureDetails, setFurnitureDetails] = useState({});
-    const {id: furnitureId} = useParams();
+    let { calledFrom } = useContext(CalledFromContext);
+    let {id: furnitureId} = useParams();
     const {userId} = useContext(UserIdContext);
 
     useEffect(() => {
@@ -17,6 +19,33 @@ export default function FurnitureDetails() {
     }, [furnitureId]);
 
     const isOwner = userId === furnitureDetails?.owner?._id;
+    const [message, setMessage] = useState("");
+
+    const navigate = useNavigate();
+
+    async function furnitureDeleteHandler() {
+
+      try {
+        const response = await deleteFurniture("/furniture/delete", furnitureId);
+        setMessage(response.message);
+        alert(response.message);
+console.log('Called From:', calledFrom);
+        // furnitureId = '';
+        if (calledFrom === "category") {
+console.log('Navigating to category');
+          navigate(`/furniture/furnitures/${furnitureDetails.category}`);
+        } else if (calledFrom === "newProducts") {
+console.log('Navigating to new products');
+          navigate(`/furniture/furnitures`);
+} else {
+  console.log('Called From has unexpected value:', calledFrom); // Debugging
+        }
+      } catch (err) {
+        setMessage("An error occurred while deleting the furniture.");
+        alert(message);
+      };
+
+    }
 
   return (
     <div>
@@ -63,8 +92,10 @@ export default function FurnitureDetails() {
               </div>
               {isOwner ? (
                 <div id="action-buttons">
+                    {/* <Link to={`/furniture/editCreate/${furnitureId}`} className="details-btn">Edit</Link> */}
+                    {/* <Link to="" onClick={() => furnitureDeleteHandler(`/furniture/delete/${furnitureId}`)} className="details-btn">Delete</Link> */}
                     <Link to={`/furniture/editCreate/${furnitureId}`} className="details-btn">Edit</Link>
-                    <Link to={`/furniture/delete/${furnitureId}`} className="details-btn">Delete</Link>
+                    <button onClick={() => furnitureDeleteHandler()} className="details-btn">Delete</button>
                 </div>
               ) : null}
             </div>
