@@ -15,7 +15,13 @@ export default function FurnitureDetails() {
     const {userId} = useContext(UserIdContext);
 
     useEffect(() => {
-        getFurnitureDetails(`/furniture/details/${furnitureId}`, setFurnitureDetails);
+      const fetchData = async () => {
+        const data = await getFurnitureDetails(`/furniture/details/${furnitureId}`);
+        setFurnitureDetails(data);
+      }
+
+      fetchData();
+        // getFurnitureDetails(`/furniture/details/${furnitureId}`, setFurnitureDetails);
     }, [furnitureId]);
 
     const isOwner = userId === furnitureDetails?.owner?._id;

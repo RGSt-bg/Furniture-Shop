@@ -42,6 +42,7 @@ export default function Main() {
             <Route path="/furniture/furnitures" element={<FurnitureList />} />
             <Route path="/furniture/furnitures/:category" element={<FurnitureList />} />
             <Route path="/furniture/furnitures/:calledFrom" element={<FurnitureList />} />
+            <Route path="/search/*" element={<FurnitureList />} />
             <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />

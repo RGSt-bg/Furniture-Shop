@@ -8,7 +8,12 @@ export default function Furnitures() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        getFurnitures('/furniture/categories', setCategories);
+      const fetchData = async () => {
+        const data = await getFurnitures('/furniture/categories');
+        setCategories(data);
+      }
+
+      fetchData();
     }, []);
 
     return(

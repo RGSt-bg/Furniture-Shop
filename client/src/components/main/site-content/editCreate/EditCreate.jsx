@@ -50,11 +50,23 @@ export default function EditCreate() {
         } = useForm(initialValues, submitHandler);
 
   useEffect(() => {
-      getFurnitures('/furniture/categories', setCategories);
+      const fetchData = async () => {
+        const data = await getFurnitures('/furniture/categories');
+        setCategories(data);
+      }
+
+      fetchData();
   }, []);
 
   useEffect(() => {
-    furnitureId && getFurnitureDetails(`/furniture/details/${furnitureId}`, setFurnitureDetails);
+    const fetchData = async () => {
+      if (furnitureId) {
+        const data = await getFurnitureDetails(`/furniture/details/${furnitureId}`);
+        setFurnitureDetails(data);
+      }
+    }
+
+    fetchData();
   }, [furnitureId]);
 
   useEffect(() => {

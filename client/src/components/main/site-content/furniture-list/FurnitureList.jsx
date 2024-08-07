@@ -4,7 +4,8 @@ import { useParams, useLocation } from "react-router-dom";
 import { CalledFromContext } from "../../Main.jsx";
 
 import FurnitureListItem from "./furniture-list-item/FurnitureListItem.jsx";
-import { getFurnitures } from "../../../../utils/furnitureApi.js";
+
+import { getFurnitures, searchFurnitures } from "../../../../utils/furnitureApi.js";
 import { calledFromWhere } from "../../../../utils/furnitureUtils.js";
 
 export default function FurnitureList() {
@@ -25,8 +26,20 @@ export default function FurnitureList() {
     }, [location.search, setCalledFrom]);
 
     useEffect(() => {
-        getFurnitures(`/furniture/furnitureList${path}`, setFurnitures);
-    }, [path]);
+      const fetchData = async () => {
+        const params = new URLSearchParams(location.search);
+        const searchString = params.get('searchString') || '';
+        let data;
+        if (searchString) {
+          data = await searchFurnitures(`/furniture/search?searchString=${searchString}`);
+        } else {
+          data = await getFurnitures(`/furniture/furnitureList${path}`);
+        }
+        setFurnitures(data);
+      };
+
+      fetchData();
+    }, [path, location.search]);
 
     return(
     <div id="content">
@@ -47,4 +60,4 @@ export default function FurnitureList() {
         </section>
     </div>
    );
-};  
+};

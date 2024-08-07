@@ -27,7 +27,3 @@ export const calledFromWhere = function (calledFrom, category) {
 
   return [isNew, noFurnitures, isNewTitle, path];
 }
-
-// export default excludeCategory(categoryName, category) {
-//   return category.filter((furniture) => furniture.category != categoryName);
-// }

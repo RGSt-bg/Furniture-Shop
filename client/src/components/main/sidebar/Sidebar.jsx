@@ -1,16 +1,48 @@
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 export default function Sidebar() {
+    
+  const navigate = useNavigate();
+  let [message, setMessage] = useState("");
+  const [formValue, setFormValue] = useState({
+    search_field: "",
+  });
+    
+  const formValueHandler = (e) => {
+    e.preventDefault();
+    setFormValue(oldValue => ({ ...oldValue, [e.target.name]: e.target.value }));
+  };
+    
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+        setFormValue(formValue);
+        navigate(`/search?searchString=${formValue.search_field}`);
+        setFormValue({ search_field: "" });
+    } catch (err) {
+      message = "An error occurred while searching the furnitures!";
+      setMessage(message);
+      alert(message);
+    };
+  };
+
   return (
     <div id="sidebar_container">
       <div className="sidebar">
         <div className="sidebar_item">
           <h3 className="searchTitle">Search Furniture</h3>
           <p><i>(by name and category)</i></p>
-          <form method="post" action="#" id="search_form">
+          <form onSubmit={formSubmitHandler}>
             <p>
               <input
                 className="search"
                 type="text"
                 name="search_field"
+                value={formValue.search_field}
+                onChange={formValueHandler}
                 placeholder="Enter part of keyword..."
               />
               <input
