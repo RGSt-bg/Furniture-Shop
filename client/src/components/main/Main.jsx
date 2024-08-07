@@ -15,6 +15,8 @@ import Contacts from "./site-content/contacts/Contacts.jsx";
 import Register from "./site-content/register/Register.jsx";
 import Login from "./site-content/login/Login.jsx";
 import Logout from "./site-content/logout/Logout.jsx";
+import AuthRoutes from "../common/AuthRoutes.jsx";
+import NoAuthRoutes from "../common/NoAuthRoutes.jsx";
 
 export const UserIdContext = createContext('');
 export const CalledFromContext = createContext('');
@@ -41,14 +43,18 @@ export default function Main() {
             <Route path="/furniture/furnitures/:category" element={<FurnitureList />} />
             <Route path="/furniture/furnitures/:calledFrom" element={<FurnitureList />} />
             <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
-            <Route path="/furniture/createCategory" element={<CreateCategory />} />
-            <Route path="/furniture/editCreate" element={<EditCreate />} />
-            <Route path="/furniture/editCreate/:id" element={<EditCreate />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/auth/register" element={<Register />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/logout" element={<Logout />} />
+            <Route element={<NoAuthRoutes />}>
+              <Route path="/auth/register" element={<Register />} />
+              <Route path="/auth/login" element={<Login />} />
+            </Route>
+            <Route element={<AuthRoutes />}>
+              <Route path="/furniture/createCategory" element={<CreateCategory />} />
+              <Route path="/furniture/editCreate" element={<EditCreate />} />
+              <Route path="/furniture/editCreate/:id" element={<EditCreate />} />
+              <Route path="/auth/logout" element={<Logout />} />
+            </Route>
           </Routes>
         </CategoryContext.Provider>
         </CalledFromContext.Provider>
