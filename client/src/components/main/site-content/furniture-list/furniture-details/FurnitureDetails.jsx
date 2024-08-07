@@ -25,7 +25,7 @@ export default function FurnitureDetails() {
 
     async function furnitureDeleteHandler() {
 
-      const confirmDelete = confirm("Are you sure you want to delete this furniture?");
+      const confirmDelete = confirm(`Are you sure you want to delete ${furnitureDetails.name} furniture?`);
       if (!confirmDelete) {
         return;
       }
