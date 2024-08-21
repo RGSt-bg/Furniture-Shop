@@ -1,6 +1,7 @@
 @import url(reset.css);
 @import url(typography.css);
 @import url(loader.css);
+@import url(modal.css);
 
 #content img {
   width: 180px;
@@ -200,6 +201,10 @@ ul#menu li.selected a:hover {
 
 .searchTitle {
   margin: 0;
+}
+
+.sidebar_item form p input[type="image"] {
+  vertical-align: bottom;
 }
 
 .sidebar_item ul {
