@@ -12,6 +12,13 @@ exports.createCategory = async (categoryData) => await Category.create(categoryD
 
 exports.getAllCategories = () => Category.find();
 
+// exports.checkIfCategoryExist = (category) => Category.findOne({ category: category });
+
+exports.checkIfCategoryExist = async (categoryData) => {
+  return await Category.findOne({ category: categoryData.category });
+};
+
+
 exports.getAllByCategory = async (category) => {
   try {
     return await Furniture.find({ category: category });
@@ -52,7 +59,7 @@ exports.getLatestFurnitures = async () => {
 
 // Create new furniture for front-end
 exports.create = async (furnitureData) => {
-  const { userId } = furnitureData.owner;
+  const userId = furnitureData.owner;
   const addedFurniture = await Furniture.create({
     owner: userId,
     ...furnitureData,

@@ -14,7 +14,7 @@ app.use(express.static('static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:5174'],
     credentials: true
   }));
 app.use(express.json());
