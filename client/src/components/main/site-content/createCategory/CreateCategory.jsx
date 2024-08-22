@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { createCategory } from "../../../../utils/furnitureApi.js";
+
+import NotificationForm from "../../../common/NotificationForm.jsx";
 
 export default function CreateCategory() {
 
@@ -10,6 +13,9 @@ export default function CreateCategory() {
   });
 
   const [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  
+  const navigate = useNavigate();
   
   const formValuesHandler = (e) => {
     e.preventDefault();
@@ -22,14 +28,20 @@ export default function CreateCategory() {
     try {
       const response = await createCategory("/furniture/createCategory", formValues);
       setMessage(response.message);
-      alert(response.message);
-      setFormValues({ category: "", imageCategory: "" });
-    } catch (err) {
+      setShowModal(!showModal);
+      if (response.message === "The category was created successfully!") 
+        setFormValues({ category: "", imageCategory: "" });
+      } catch (err) {
       setMessage("An error occurred while creating the category.");
       alert(message);
     };
   };
   
+  const handleCloseModal = () => {
+    setShowModal(!showModal);
+    // navigate("/furniture/createCategory");
+  };
+
    return(
     <div id="content">
     <h1><b><i>Create Category</i></b></h1>
@@ -50,6 +62,12 @@ export default function CreateCategory() {
         <p>* - required field</p>
       </div>
     </form>
+    {showModal && (
+      <NotificationForm
+          notices={{ title: "Category", message}}
+          onClose={handleCloseModal}
+      />
+    )}
   </div>
    );
 };
