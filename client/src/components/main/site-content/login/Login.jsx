@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../../App.jsx";
 import { UserIdContext } from "../../Main.jsx";
 
 import { login } from "../../../../utils/authUtils.js";
+import NotificationForm from "../../../common/NotificationForm.jsx";
 
 export default function Login() {
   
@@ -13,35 +14,39 @@ export default function Login() {
     password: "",
   });
   let [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const {setIsAuth} = useContext(AuthContext);
   let {userId, setUserId} = useContext(UserIdContext);
   
   const navigate = useNavigate();
-  
+
   const formValuesHandler = (e) => {
     e.preventDefault();
     setFormValues(oldValues => ({ ...oldValues, [e.target.name]: e.target.value }));
   };
-    
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
     try {
       const response = await login("/auth/login", formValues);
       if (response.success) {
+        setShowModal(!showModal);
         setMessage(response.message);
-        alert(response.message);
         setFormValues({ email: "", password: "" });
-        setIsAuth(true);
         userId = response._id;
         setUserId(userId);
-        navigate("/");
-}
+      }
     } catch (err) {
-      message = "An error occurred while logging!";
-      setMessage(message);
-      alert(message);
+        setMessage(message);
+        alert(message);
     };
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(!showModal);
+    navigate("/");
+    setIsAuth(true);
   };
 
    return(
@@ -66,6 +71,12 @@ export default function Login() {
         </p>
       </div>
     </form>
+    {showModal && (
+      <NotificationForm
+          notices={{ title: "Login", message}}
+          onClose={handleCloseModal}
+      />
+    )}
   </div>
    );
 };
