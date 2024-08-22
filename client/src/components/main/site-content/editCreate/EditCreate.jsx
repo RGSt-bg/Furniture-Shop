@@ -5,6 +5,8 @@ import { UserIdContext } from "../../Main.jsx";
 
 import { useForm } from "../../../../hooks/useForm.js";
 
+import NotificationForm from "../../../common/NotificationForm.jsx";
+
 import { getFurnitures, getFurnitureDetails, createFurnitures, editFurnitures } from "../../../../utils/furnitureApi.js";
 
 export default function EditCreate() {
@@ -15,6 +17,8 @@ export default function EditCreate() {
   const isCreate = !furnitureId;
   const [categories, setCategories] = useState([]);
   const [furnitureDetails, setFurnitureDetails] = useState({});
+  let [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const initialValues = {
     name: '',
     category: '',
@@ -29,13 +33,15 @@ export default function EditCreate() {
   const submitHandler = async (values) => {
     try {
       values.owner = userId;
+      let result = "";
       if (isCreate) {
-        await createFurnitures(`/furniture/createFurniture`, values);
-        navigate(`/furniture/furnitures`);
+        result = await createFurnitures(`/furniture/createFurniture`, values);
       } else {
-        await editFurnitures(`/furniture/edit/${furnitureId}`, values);
-        navigate(`/furniture/details/${furnitureId}`);
+        result = await editFurnitures(`/furniture/edit/${furnitureId}`, values);
       }
+      setMessage(result.message);
+      setShowModal(true);
+
       resetForm();
     } catch (err) {
       console.log(err.message);
@@ -50,12 +56,11 @@ export default function EditCreate() {
         } = useForm(initialValues, submitHandler);
 
   useEffect(() => {
-      const fetchData = async () => {
-        const data = await getFurnitures('/furniture/categories');
-        setCategories(data);
-      }
-
-      fetchData();
+    const fetchData = async () => {
+      const data = await getFurnitures('/furniture/categories');
+      setCategories(data);
+    }
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -83,6 +88,11 @@ export default function EditCreate() {
       });
     }
   }, [furnitureDetails]);
+
+  const handleCloseModal = () => {
+    setShowModal(!showModal);
+    navigate(isCreate ? `/furniture/furnitures` : `/furniture/details/${furnitureId}`);
+  };
 
    return(
     <div id="content">
@@ -148,6 +158,12 @@ export default function EditCreate() {
         <p>* - required field</p>
       </div>
     </form>
+    {showModal && (
+      <NotificationForm
+          notices={{ title: "Category", message}}
+          onClose={handleCloseModal}
+      />
+    )}
   </div>
    );
 };
