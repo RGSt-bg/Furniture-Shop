@@ -51,6 +51,11 @@ router.get("/createCategory", async (req, res) => {
 router.post("/createCategory", async (req, res) => {
   const newCategory = req.body;
 
+  if (await furnitureService.checkIfCategoryExist(newCategory)) {
+    res.send({"message": "The category already exist!"});
+    return;
+  }
+
   try {
     await furnitureService.createCategory(newCategory);
     // res.render("furniture/createCategory");
