@@ -19,7 +19,6 @@ export const register = async function (path, registerData) {
         return data;
 
     } catch (error) {
-        alert(error.message);
         return { success: false, message: error.message };
     }
 }
@@ -34,6 +33,7 @@ export const login = async function (path, loginData) {
         const data = await response.json();
         if (data.message != 'Wrong password or email address!')
             localStorage.setItem("auth", data.token);
+            localStorage.setItem('userId', data._id);
         return data;
     } catch (error) {
         alert(error.message);
