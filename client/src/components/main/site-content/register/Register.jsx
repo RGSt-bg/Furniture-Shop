@@ -43,15 +43,15 @@ export default function Register() {
     try {
       const response = await register("/auth/register", formValues);
       if (response.success) {
-        setMessage(response.message);
         setFormValues({ username: "", email: "", password: "", rePassword: "" });
         userId = response._id;
         setUserId(userId);
-        setShowModal(!showModal);
       }
-    } catch (err) {
-      setMessage(err.message);
-      alert(err.message);
+      setMessage(response.message);
+      setShowModal(!showModal);
+    } catch (error) {
+      setMessage(error.message);
+      setShowModal(!showModal);
     };
   };
   
