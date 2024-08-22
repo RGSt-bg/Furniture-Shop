@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
+
+import { CalledFromContext } from "../Main.jsx";
 
 export default function Sidebar() {
     
@@ -9,7 +11,12 @@ export default function Sidebar() {
   const [formValue, setFormValue] = useState({
     search_field: "",
   });
-    
+  const {setCalledFrom} = useContext(CalledFromContext);
+
+  useEffect(() => {
+    setCalledFrom("search");
+  }, []);
+
   const formValueHandler = (e) => {
     e.preventDefault();
     setFormValue(oldValue => ({ ...oldValue, [e.target.name]: e.target.value }));
