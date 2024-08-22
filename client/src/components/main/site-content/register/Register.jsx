@@ -5,6 +5,7 @@ import { AuthContext } from "../../../../App.jsx";
 import { UserIdContext } from "../../Main.jsx";
 
 import { register } from "../../../../utils/authUtils";
+import NotificationForm from "../../../common/NotificationForm.jsx";
 
 export default function Register() {
   
@@ -16,6 +17,7 @@ export default function Register() {
   });
 
   let [message, setMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const {setIsAuth} = useContext(AuthContext);
   let {userId, setUserId} = useContext(UserIdContext);
 
@@ -32,7 +34,9 @@ export default function Register() {
     if (formValues.password !== formValues.rePassword) {
       message = "Passwords do not match!";
       setMessage(message);
-      alert(message);
+      setShowModal(!showModal);
+      navigate("/auth/register");
+      setIsAuth(false);
       return;
     }
 
@@ -40,12 +44,10 @@ export default function Register() {
       const response = await register("/auth/register", formValues);
       if (response.success) {
         setMessage(response.message);
-        alert(response.message);
         setFormValues({ username: "", email: "", password: "", rePassword: "" });
-        setIsAuth(true);
         userId = response._id;
         setUserId(userId);
-        navigate("/");
+        setShowModal(!showModal);
       }
     } catch (err) {
       setMessage(err.message);
@@ -53,6 +55,14 @@ export default function Register() {
     };
   };
   
+  const handleCloseModal = () => {
+    setShowModal(!showModal);
+    if (localStorage.getItem('auth')) {
+      navigate("/");
+      setIsAuth(true);
+    }
+  };
+
    return(
     <div id="content">
     <h1><b><i>Registration Form</i></b></h1>
@@ -83,6 +93,12 @@ export default function Register() {
         </p>
       </div>
     </form>
+    {showModal && (
+      <NotificationForm
+          notices={{ title: "Registration", message}}
+          onClose={handleCloseModal}
+      />
+    )}
   </div>
    );
 };
