@@ -3,54 +3,67 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { UserIdContext, CalledFromContext } from "../../../Main.jsx";
 
+import ConfirmationForm from "../../../../common/ConfirmationForm.jsx";
+import NotificationForm from "../../../../common/NotificationForm.jsx";
+
 import { getFurnitureDetails, deleteFurniture } from "../../../../../utils/furnitureApi.js";
 
 let furnitureId = null;
 
 export default function FurnitureDetails() {
 
-    const [furnitureDetails, setFurnitureDetails] = useState({});
-    let { calledFrom } = useContext(CalledFromContext);
-    let {id: furnitureId} = useParams();
-    const {userId} = useContext(UserIdContext);
+  const [furnitureDetails, setFurnitureDetails] = useState({});
+  let { calledFrom } = useContext(CalledFromContext);
+  let {id: furnitureId} = useParams();
+  const {userId} = useContext(UserIdContext);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await getFurnitureDetails(`/furniture/details/${furnitureId}`);
-        setFurnitureDetails(data);
-      }
-
-      fetchData();
-        // getFurnitureDetails(`/furniture/details/${furnitureId}`, setFurnitureDetails);
-    }, [furnitureId]);
-
-    const isOwner = userId === furnitureDetails?.owner?._id;
-    const [message, setMessage] = useState("");
-
-    const navigate = useNavigate();
-
-    async function furnitureDeleteHandler() {
-
-      const confirmDelete = confirm(`Are you sure you want to delete ${furnitureDetails.name} furniture?`);
-      if (!confirmDelete) {
-        return;
-      }
-        try {
-          const response = await deleteFurniture("/furniture/delete", furnitureId);
-          setMessage(response.message);
-          // furnitureId = '';
-          if (calledFrom === "category") {
-            navigate(`/furniture/furnitures/${furnitureDetails.category}`);
-          } else if (calledFrom === "newProducts") {
-            navigate(`/furniture/furnitures`);
-          }
-          alert(response.message);
-        } catch (err) {
-          setMessage("An error occurred while deleting the furniture.");
-          alert(message);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getFurnitureDetails(`/furniture/details/${furnitureId}`);
+      setFurnitureDetails(data);
     }
+    fetchData();
+  }, [furnitureId]);
 
+  const isOwner = userId === furnitureDetails?.owner?._id;
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  function furnitureDeleteHandler() {
+    setShowConfirmation(true);
+  }
+
+  async function furnitureDeleteModal() {
+    try {
+      const response = await deleteFurniture("/furniture/delete", furnitureId);
+      setMessage(response.message);
+console.log("Before close Confirmation");
+      setShowConfirmation(false);
+console.log("Before open Notification");
+      setShowNotification(true);
+    } catch (err) {
+      setMessage("An error occurred while deleting the furniture.");
+      setShowNotification(true);
+    };
+  }
+        
+  const handleCloseConfirmation = () => {
+    setShowConfirmation(false);
+  };
+    
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+    if (calledFrom === "category") {
+      navigate(`/furniture/furnitures/${furnitureDetails.category}`);
+    } else if (calledFrom === "newProducts") {
+      navigate(`/furniture/furnitures`);
+    } else if (calledFrom === "search") {
+      navigate(`/furniture/furnitures`);
+    }
+  };
+      
   return (
     <div>
       { furnitureId ? (
@@ -96,8 +109,6 @@ export default function FurnitureDetails() {
               </div>
               {isOwner ? (
                 <div id="action-buttons">
-                    {/* <Link to={`/furniture/editCreate/${furnitureId}`} className="details-btn">Edit</Link> */}
-                    {/* <Link to="" onClick={() => furnitureDeleteHandler(`/furniture/delete/${furnitureId}`)} className="details-btn">Delete</Link> */}
                     <Link to={`/furniture/editCreate/${furnitureId}`} className="details-btn">Edit</Link>
                     <button onClick={() => furnitureDeleteHandler()} className="details-btn">Delete</button>
                 </div>
@@ -108,6 +119,22 @@ export default function FurnitureDetails() {
       ) : (
         <div className="loader"></div>
       )}
+
+      {showConfirmation && (
+        <ConfirmationForm
+          notices={{ title: "Delete Furniture", message: `Are you sure you want to delete ${furnitureDetails.name} furniture?` }}
+          onConfirm={furnitureDeleteModal}
+          onClose={handleCloseConfirmation}
+        />
+      )}
+
+      {showNotification && (
+        <NotificationForm
+          notices={message}
+          onClose={handleCloseNotification}
+        />
+      )}
+
     </div>
   );
 }
