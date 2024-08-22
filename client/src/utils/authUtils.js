@@ -50,6 +50,6 @@ export const logout = async function (path) {
         localStorage.removeItem("auth");
         return data;
     } catch (error) {
-        alert(error.message);
+        return error.message;
     }
 };
