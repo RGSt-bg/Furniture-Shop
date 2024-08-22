@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import {FurnitureIdContext} from "./site-content/furniture-list/furniture-details/FurnitureDetails.jsx";
@@ -17,6 +17,7 @@ import Login from "./site-content/login/Login.jsx";
 import Logout from "./site-content/logout/Logout.jsx";
 import AuthRoutes from "../common/AuthRoutes.jsx";
 import NoAuthRoutes from "../common/NoAuthRoutes.jsx";
+import NotificationForm from "../common/NotificationForm.jsx";
 
 export const UserIdContext = createContext('');
 export const CalledFromContext = createContext('');
@@ -28,13 +29,26 @@ export default function Main() {
   const [calledFrom, setCalledFrom] = useState('');
   const [category, setCategory] = useState('');
 
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
+  }, []);
+  
+  useEffect(() => {
+    if (userId) {
+      localStorage.setItem('userId', userId);
+    }
+  }, [userId]);
+
   return(
     <div id="main">
       <div id="site_content">
+        <CalledFromContext.Provider value={{calledFrom, setCalledFrom}}>
         <Sidebar />
         <FurnitureIdContext.Provider value={null}>
         <UserIdContext.Provider value={{userId, setUserId}}>
-        <CalledFromContext.Provider value={{calledFrom, setCalledFrom}}>
         <CategoryContext.Provider value={{category, setCategory}}>
           <Routes>
             <Route path="/" element={<SiteContent />} />
@@ -46,6 +60,7 @@ export default function Main() {
             <Route path="/furniture/details/:id" element={<FurnitureDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/notification" element={<NotificationForm />} />
             <Route element={<NoAuthRoutes />}>
               <Route path="/auth/register" element={<Register />} />
               <Route path="/auth/login" element={<Login />} />
@@ -58,9 +73,9 @@ export default function Main() {
             </Route>
           </Routes>
         </CategoryContext.Provider>
-        </CalledFromContext.Provider>
         </UserIdContext.Provider>
         </FurnitureIdContext.Provider>
+        </CalledFromContext.Provider>
     </div>
     </div>
    );
