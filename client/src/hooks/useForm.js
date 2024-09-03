@@ -10,10 +10,10 @@ export function useForm(initialValues, submitCallback) {
         setValues({ ...values, [name]: value });
     };
 
-    const formSubmitHandler = (e) => {
+    const formSubmitHandler = async (e) => {
         e.preventDefault();
 
-        submitCallback(values);
+        await submitCallback(values);
     };
 
     const resetForm = () => {
@@ -21,7 +21,7 @@ export function useForm(initialValues, submitCallback) {
     };
 
     const setFormValues = (newValues) => {
-        setValues(newValues);
+        setValues({ ...values, ...newValues });
     };
 
     return {
