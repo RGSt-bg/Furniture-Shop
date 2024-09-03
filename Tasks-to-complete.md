@@ -2,12 +2,12 @@
 Tasks to be completed
 
 ## 1. Create Modal forms (Notification/Confirmation)
-- [X] Login
+- [ ] Login - not reacted to wrong password!
 - [X] Register
 - [X] Logout
 - [X] Create Category
-- [X] Create Furniture
-- [ ] Edit Furniture
+- [ ] Create Furniture
+- [X] Edit Furniture
 - [ ] Delete Furniture
 ## 2. Data validation
 - [ ] Login
@@ -25,5 +25,5 @@ Tasks to be completed
 - [ ] Add name/email to the logged-in user to the top right corner
 - [ ] When click on the name/email go to User Edit menu
 - [ ] Write component for User Edit
-## 6. Make User Edit menu
+## 6. Add Loader where needed
 - 
