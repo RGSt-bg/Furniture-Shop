@@ -39,9 +39,7 @@ export default function FurnitureDetails() {
     try {
       const response = await deleteFurniture("/furniture/delete", furnitureId);
       setMessage(response.message);
-console.log("Before close Confirmation");
       setShowConfirmation(false);
-console.log("Before open Notification");
       setShowNotification(true);
     } catch (err) {
       setMessage("An error occurred while deleting the furniture.");
