@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { UserIdContext } from "../../Main.jsx";
+import { UserIdContext, CalledFromContext } from "../../Main.jsx";
 
 import { useForm } from "../../../../hooks/useForm.js";
 
@@ -12,9 +12,11 @@ import { getFurnitures, getFurnitureDetails, createFurnitures, editFurnitures } 
 export default function EditCreate() {
 
   const navigate = useNavigate();
-  const {userId, setUserId} = useContext(UserIdContext);
+  const {userId} = useContext(UserIdContext);
+  const {setCalledFrom} = useContext(CalledFromContext);
   const {id: furnitureId} = useParams();
-  const isCreate = !furnitureId;
+  const [isCreate] = useState(!furnitureId);
+  const [furnitureCategory, setFurnitureCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [furnitureDetails, setFurnitureDetails] = useState({});
   let [message, setMessage] = useState("");
@@ -53,7 +55,11 @@ export default function EditCreate() {
           formSubmitHandler, 
           resetForm, 
           setFormValues, 
-        } = useForm(initialValues, submitHandler);
+        } = useForm(initialValues, submitHandler, setFurnitureDetails);
+
+  useEffect(() => {
+    setCalledFrom("category");
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,23 +81,31 @@ export default function EditCreate() {
   }, [furnitureId]);
 
   useEffect(() => {
-    if (furnitureDetails && furnitureDetails._id) {
-      setFormValues({
-        name: furnitureDetails.name || '',
-        category: furnitureDetails.category || '',
-        imageFurniture: furnitureDetails.imageFurniture || '',
-        color: furnitureDetails.color || '',
-        material: furnitureDetails.material || '',
-        price: furnitureDetails.price || '',
-        description: furnitureDetails.description || '',
-        owner: furnitureDetails.owner || '',
-      });
-    }
+    const updateFormValues = async () => {
+      if (furnitureDetails) {
+        const furnitureData = await setFormValues({
+          name: furnitureDetails.name || '',
+          category: furnitureDetails.category || '',
+          imageFurniture: furnitureDetails.imageFurniture || '',
+          color: furnitureDetails.color || '',
+          material: furnitureDetails.material || '',
+          price: furnitureDetails.price || '',
+          description: furnitureDetails.description || '',
+          owner: furnitureDetails.owner || '',
+        });
+        if (furnitureDetails.category) {
+          setFurnitureCategory(furnitureDetails.category);
+        }
+        setFurnitureDetails(furnitureData);
+      }
+    };
+
+    updateFormValues();
   }, [furnitureDetails]);
 
   const handleCloseModal = () => {
     setShowModal(!showModal);
-    navigate(isCreate ? `/furniture/furnitures` : `/furniture/details/${furnitureId}`);
+    navigate(isCreate ? `/furniture/furnitures/${furnitureCategory}` : `/furniture/details/${furnitureId}`);
   };
 
    return(
@@ -160,7 +174,7 @@ export default function EditCreate() {
     </form>
     {showModal && (
       <NotificationForm
-          notices={{ title: "Category", message}}
+          notices={{ title: "Furniture", message}}
           onClose={handleCloseModal}
       />
     )}
