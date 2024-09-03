@@ -4,7 +4,7 @@ export const calledFromWhere = function (calledFrom, category) {
   let noFurnitures = "";
   let path = `?calledFrom=${calledFrom}`;
 
-  if (category)
+  if (path && category)
     path = `${path}&category=${category}`;
 
   if (calledFrom === "newProducts") {
