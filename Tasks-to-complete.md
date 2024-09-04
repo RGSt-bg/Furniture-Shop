@@ -10,7 +10,7 @@ Tasks to be completed
 - [X] Edit Furniture
 - [X] Delete Furniture
 ## 2. Data validation
-- [ ] Login
+- [X] Login
 - [ ] Register
 - [ ] Create Category
 - [ ] Create Furniture

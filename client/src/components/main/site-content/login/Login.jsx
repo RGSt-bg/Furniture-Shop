@@ -29,6 +29,12 @@ export default function Login() {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
+    if (!formValues.email || !formValues.password) {
+      setMessage("Please fill in all fields!");
+      setShowModal(!showModal);
+      return;
+    }
+
     try {
       const response = await login("/auth/login", formValues);
       setMessage(response.message);
@@ -61,11 +67,11 @@ export default function Login() {
       <div className="form_settings">
         <p>
           <span>Email address</span>
-          <input className="contact" type="email" name="email" required value={formValues.email} onChange={formValuesHandler} />
+          <input className="contact" type="email" name="email" value={formValues.email} onChange={formValuesHandler} />
         </p>
         <p>
           <span>Password</span>
-          <input className="contact" type="password" name="password" required value={formValues.password} onChange={formValuesHandler} />
+          <input className="contact" type="password" name="password" value={formValues.password} onChange={formValuesHandler} />
         </p>
         <p className="login">
           <span>&nbsp;</span>
