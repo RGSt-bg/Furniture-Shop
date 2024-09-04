@@ -14,6 +14,7 @@ export default function Login() {
     password: "",
   });
   let [message, setMessage] = useState("");
+  let [success, setSuccess] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const {setIsAuth} = useContext(AuthContext);
   let {userId, setUserId} = useContext(UserIdContext);
@@ -30,23 +31,27 @@ export default function Login() {
 
     try {
       const response = await login("/auth/login", formValues);
+      setMessage(response.message);
+      setShowModal(!showModal);
       if (response.success) {
-        setShowModal(!showModal);
-        setMessage(response.message);
+        setSuccess(true);
         setFormValues({ email: "", password: "" });
         userId = response._id;
         setUserId(userId);
       }
     } catch (err) {
         setMessage(message);
-        alert(message);
-    };
+        setSuccess(false);
+        setShowModal(!showModal);
+      };
   };
 
   const handleCloseModal = () => {
     setShowModal(!showModal);
-    navigate("/");
-    setIsAuth(true);
+    if (success) {
+      setIsAuth(true);
+      navigate("/");
+    }
   };
 
    return(

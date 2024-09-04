@@ -31,9 +31,10 @@ export const login = async function (path, loginData) {
             body: JSON.stringify(loginData),
             });
         const data = await response.json();
-        if (data.message != 'Wrong password or email address!')
+        if (data.success) {
             localStorage.setItem("auth", data.token);
             localStorage.setItem('userId', data._id);
+        }
         return data;
     } catch (error) {
         alert(error.message);

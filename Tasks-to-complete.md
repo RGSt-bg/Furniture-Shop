@@ -2,7 +2,7 @@
 Tasks to be completed
 
 ## 1. Create Modal forms (Notification/Confirmation)
-- [ ] Login - not reacted to wrong password!
+- [X] Login
 - [X] Register
 - [X] Logout
 - [X] Create Category

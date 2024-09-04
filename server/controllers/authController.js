@@ -103,7 +103,7 @@ router.post('/logout', (req, res) => {
 
         const response = {
             success: true,
-            message: 'Logged off successfully!',
+            message: 'Logged out successfully!',
           };
         
         res.send(JSON.stringify(response));
