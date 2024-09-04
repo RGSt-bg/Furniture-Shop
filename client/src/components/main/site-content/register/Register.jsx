@@ -31,11 +31,18 @@ export default function Register() {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    if (formValues.password !== formValues.rePassword) {
-      message = "Passwords do not match!";
-      setMessage(message);
+    if (!formValues.username || !formValues.email || 
+        !formValues.password || !formValues.rePassword) {
+      setMessage("Please fill in all fields!");
       setShowModal(!showModal);
-      navigate("/auth/register");
+      return;
+    }
+
+    if (formValues.password !== formValues.rePassword) {
+      // message = "Passwords do not match!";
+      setMessage("Passwords do not match!");
+      setShowModal(!showModal);
+      // navigate("/auth/register");
       setIsAuth(false);
       return;
     }
@@ -70,19 +77,19 @@ export default function Register() {
       <div className="form_settings">
         <p>
           <span>Username</span>
-          <input className="contact" type="text" name="username" required value={formValues.username} onChange={formValuesHandler} />
+          <input className="contact" type="text" name="username" value={formValues.username} onChange={formValuesHandler} />
         </p>
         <p>
           <span>Email Address</span>
-          <input className="contact" type="email" name="email" required value={formValues.email} onChange={formValuesHandler} />
+          <input className="contact" type="email" name="email" value={formValues.email} onChange={formValuesHandler} />
         </p>
         <p>
           <span>Password</span>
-          <input className="contact" type="password" name="password" required value={formValues.password} onChange={formValuesHandler} />
+          <input className="contact" type="password" name="password" value={formValues.password} onChange={formValuesHandler} />
         </p>
         <p>
           <span>Repeat password</span>
-          <input className="contact" type="password" name="rePassword" required value={formValues.rePassword} onChange={formValuesHandler} />
+          <input className="contact" type="password" name="rePassword" value={formValues.rePassword} onChange={formValuesHandler} />
         </p>
         <p className="register">
           <span>&nbsp;</span>

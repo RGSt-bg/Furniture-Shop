@@ -11,7 +11,7 @@ Tasks to be completed
 - [X] Delete Furniture
 ## 2. Data validation
 - [X] Login
-- [ ] Register
+- [X] Register
 - [ ] Create Category
 - [ ] Create Furniture
 ## 3. Add "404 Page Not Found"
