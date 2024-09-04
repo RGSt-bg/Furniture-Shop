@@ -12,7 +12,7 @@ Tasks to be completed
 ## 2. Data validation
 - [X] Login
 - [X] Register
-- [ ] Create Category
+- [X] Create Category
 - [ ] Create Furniture
 ## 3. Add "404 Page Not Found"
 ## 4. Change Create Category Menu:

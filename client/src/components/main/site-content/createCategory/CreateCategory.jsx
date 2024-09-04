@@ -25,6 +25,12 @@ export default function CreateCategory() {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
+    if (!formValues.category || !formValues.imageCategory) {
+      setMessage("Please fill in all fields!");
+      setShowModal(!showModal);
+      return;
+    }
+
     try {
       const response = await createCategory("/furniture/createCategory", formValues);
       setMessage(response.message);
@@ -33,13 +39,12 @@ export default function CreateCategory() {
         setFormValues({ category: "", imageCategory: "" });
       } catch (err) {
       setMessage("An error occurred while creating the category.");
-      alert(message);
+      setShowModal(!showModal);
     };
   };
   
   const handleCloseModal = () => {
     setShowModal(!showModal);
-    // navigate("/furniture/createCategory");
   };
 
    return(
@@ -48,18 +53,18 @@ export default function CreateCategory() {
     <form onSubmit={formSubmitHandler}>
       <div className="form_settings">
         <p>
-          <span>Category*</span>
-          <input className="contact" type="text" name="category" required minLength="3" value={formValues.category} onChange={formValuesHandler} />
+          <span>Category</span>
+          <input className="contact" type="text" name="category" minLength="3" value={formValues.category} onChange={formValuesHandler} />
         </p>
         <p>
-          <span>Image*</span>
-          <input className="contact" type="text" name="imageCategory" required value={formValues.imageCategory} onChange={formValuesHandler}/>
+          <span>Image</span>
+          <input className="contact" type="text" name="imageCategory" value={formValues.imageCategory} onChange={formValuesHandler}/>
         </p>
         <p className="createCategory">
           <span>&nbsp;</span>
           <input className="submit" type="submit" name="contact_submitted" value="Create" />
         </p>
-        <p>* - required field</p>
+        {/* <p>* - required field</p> */}
       </div>
     </form>
     {showModal && (
