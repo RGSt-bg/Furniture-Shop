@@ -167,7 +167,7 @@ router.post("/edit/:furnitureId", async (req, res) => {
 router.get("/delete/:furnitureId", async (req, res) => {
   const furnitureId = req.params.furnitureId || "";
   await furnitureService.delete(furnitureId);
-  res.send({"message": "The furniture was deleted successfully!"});
+  res.send({"status": "success", "message": "The furniture was deleted successfully!"});
 });
 
 // Search route for front-end

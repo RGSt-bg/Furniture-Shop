@@ -8,7 +8,7 @@ Tasks to be completed
 - [X] Create Category
 - [X] Create Furniture
 - [X] Edit Furniture
-- [ ] Delete Furniture
+- [X] Delete Furniture
 ## 2. Data validation
 - [ ] Login
 - [ ] Register
@@ -21,6 +21,7 @@ Tasks to be completed
 - [ ] Add submenu Edit/Delete
 - [ ] Write functionalities for Edit
 - [ ] Write functionalities for Delete
+  - [ ] Check if there is furniture in the category
 ## 5. Make User Edit menu
 - [ ] Add name/email to the logged-in user to the top right corner
 - [ ] When click on the name/email go to User Edit menu

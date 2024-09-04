@@ -38,9 +38,11 @@ export default function FurnitureDetails() {
   async function furnitureDeleteModal() {
     try {
       const response = await deleteFurniture("/furniture/delete", furnitureId);
-      setMessage(response.message);
-      setShowConfirmation(false);
-      setShowNotification(true);
+      if (response.status === "success") {
+        setMessage(`Furniture ${furnitureDetails.name} deleted successfully!`);
+        setShowConfirmation(false);
+        setShowNotification(true);
+      }
     } catch (err) {
       setMessage("An error occurred while deleting the furniture.");
       setShowNotification(true);
@@ -128,7 +130,7 @@ export default function FurnitureDetails() {
 
       {showNotification && (
         <NotificationForm
-          notices={message}
+          notices={{ title: "Delete Furniture", message }}
           onClose={handleCloseNotification}
         />
       )}
