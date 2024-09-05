@@ -13,7 +13,7 @@ Tasks to be completed
 - [X] Login
 - [X] Register
 - [X] Create Category
-- [ ] Create Furniture
+- [X] Create Furniture
 ## 3. Add "404 Page Not Found"
 ## 4. Change Create Category Menu:
 - [ ] Change the name to Categories

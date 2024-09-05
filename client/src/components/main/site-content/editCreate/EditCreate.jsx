@@ -16,6 +16,7 @@ export default function EditCreate() {
   const {setCalledFrom} = useContext(CalledFromContext);
   const {id: furnitureId} = useParams();
   const [isCreate] = useState(!furnitureId);
+  const [validData, setValidData] = useState(true);
   const [furnitureCategory, setFurnitureCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [furnitureDetails, setFurnitureDetails] = useState({});
@@ -33,6 +34,15 @@ export default function EditCreate() {
   }
 
   const submitHandler = async (values) => {
+
+    if (!values.name || !values.category || !values.imageFurniture || 
+        !values.price || !values.description) {
+      setMessage("Please fill in all required fields!");
+      setValidData(false);
+      setShowModal(true);
+      return;
+    }
+
     try {
       values.owner = userId;
       let result = "";
@@ -104,7 +114,11 @@ export default function EditCreate() {
   }, [furnitureDetails]);
 
   const handleCloseModal = () => {
-    setShowModal(!showModal);
+    if (!validData) {
+      setValidData(true);
+      setShowModal(!showModal);
+      return;
+    }
     navigate(isCreate ? `/furniture/furnitures/${furnitureCategory}` : `/furniture/details/${furnitureId}`);
   };
 
@@ -119,11 +133,11 @@ export default function EditCreate() {
       <div className="form_settings">
         <p>
           <span>Name*</span>
-          <input className="contact" type="text" name="name" required value={values.name} onChange={changeHandler} />
+          <input className="contact" type="text" name="name" value={values.name} onChange={changeHandler} />
         </p>
         <p>
           <span>Category*</span>
-          <select className="contact" required name="category" value={values.category} onChange={changeHandler}>
+          <select className="contact" name="category" value={values.category} onChange={changeHandler}>
             <option value="">Select a category</option>
             {categories.length > 0 && categories.map((category) => (
               <option key={category._id} value={category.category}>{category.category}</option>
@@ -132,7 +146,7 @@ export default function EditCreate() {
         </p>
         <p>
           <span>Image*</span>
-          <input className="contact" type="text" name="imageFurniture" required value={values.imageFurniture} onChange={changeHandler} />
+          <input className="contact" type="text" name="imageFurniture" value={values.imageFurniture} onChange={changeHandler} />
         </p>
         <p>
           <span>Color</span>
@@ -144,7 +158,7 @@ export default function EditCreate() {
         </p>
         <p>
           <span>Price*</span>
-          <input className="contact" type="number" name="price" required min={1.00} value={values.price} onChange={changeHandler} />
+          <input className="contact" type="number" name="price" min={1.00} value={values.price} onChange={changeHandler} />
         </p>
         <p>
           <span>Description*</span>
@@ -153,7 +167,6 @@ export default function EditCreate() {
             rows={8}
             cols={50}
             name="description"
-            required
             minLength={20}
             value={values.description}
             onChange={changeHandler}
