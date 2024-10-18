@@ -2,6 +2,7 @@
 @import url(typography.css);
 @import url(loader.css);
 @import url(modal.css);
+@import url(modal404.css);
 
 #content img {
   width: 180px;

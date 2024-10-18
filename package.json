@@ -1,0 +1,25 @@
+{
+  "name": "furniture-shop",
+  "version": "1.0.0",
+  "description": "On-line furniture shop",
+  "main": "main.jsx",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RGSt-bg/Furniture-Shop.git"
+  },
+  "keywords": [
+    "furniture"
+  ],
+  "author": "RGSt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RGSt-bg/Furniture-Shop/issues"
+  },
+  "homepage": "https://github.com/RGSt-bg/Furniture-Shop#readme"
+}

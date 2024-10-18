@@ -14,7 +14,10 @@ Tasks to be completed
 - [X] Register
 - [X] Create Category
 - [X] Create Furniture
-## 3. Add "404 Page Not Found"
+## 3. Add modal "Page Not Found" (with Redux)
+- [X] Create component
+- [X] Add to route
+- [X] Make CSS
 ## 4. Change Create Category Menu:
 - [ ] Change the name to Categories
 - [ ] Add submenu Create

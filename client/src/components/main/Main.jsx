@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { showModal, hideModal } from "../../app/store.js"
 
 import {FurnitureIdContext} from "./site-content/furniture-list/furniture-details/FurnitureDetails.jsx";
 
@@ -18,6 +20,7 @@ import Logout from "./site-content/logout/Logout.jsx";
 import AuthRoutes from "../common/AuthRoutes.jsx";
 import NoAuthRoutes from "../common/NoAuthRoutes.jsx";
 import NotificationForm from "../common/NotificationForm.jsx";
+import PageNotFound404 from "../common/PageNotFound404.jsx";
 
 export const UserIdContext = createContext('');
 export const CalledFromContext = createContext('');
@@ -28,6 +31,9 @@ export default function Main() {
   const [userId, setUserId] = useState('');
   const [calledFrom, setCalledFrom] = useState('');
   const [category, setCategory] = useState('');
+
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
@@ -41,6 +47,18 @@ export default function Main() {
       localStorage.setItem('userId', userId);
     }
   }, [userId]);
+
+  const handleShowModal = () => {
+    if (!isModalOpen) {
+      dispatch(showModal());
+    }
+  };
+
+  const handleCloseModal = () => {
+    if (isModalOpen) {
+      dispatch(hideModal());
+    }
+  };
 
   return(
     <div id="main">
@@ -71,6 +89,7 @@ export default function Main() {
               <Route path="/furniture/editCreate/:id" element={<EditCreate />} />
               <Route path="/auth/logout" element={<Logout />} />
             </Route>
+            <Route path="*" element={<PageNotFound404 onShow={handleShowModal} onClose={handleCloseModal} />} />
           </Routes>
         </CategoryContext.Provider>
         </UserIdContext.Provider>
